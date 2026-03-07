@@ -9,14 +9,11 @@ width:90%;
 box-shadow:0 20px 40px rgba(0,0,0,0.25);
 }
 
+/* фото */
+
 .photo{
 width:100%;
 max-width:220px;
-border-radius:20px;
-margin-bottom:20px;
-}
-.photo{
-width:220px;
 border-radius:20px;
 margin-bottom:20px;
 box-shadow:0 15px 35px rgba(0,0,0,0.3);
@@ -26,6 +23,14 @@ transition:0.4s;
 .photo:hover{
 transform:scale(1.05);
 }
+
+/* скрытый текст */
+
+.hidden{
+display:none;
+}
+
+/* цветы слева */
 
 .flowersLeft{
 position:absolute;
@@ -39,6 +44,8 @@ gap:25px;
 animation:flowerMove 4s infinite ease-in-out;
 }
 
+/* цветы справа */
+
 .flowersRight{
 position:absolute;
 right:40px;
@@ -51,7 +58,10 @@ gap:25px;
 animation:flowerMove 4s infinite ease-in-out;
 }
 
+/* анимация цветов */
+
 @keyframes flowerMove{
+
 0%{
 transform:translateY(-50%) rotate(-6deg);
 }
@@ -63,4 +73,5 @@ transform:translateY(-55%) rotate(6deg);
 100%{
 transform:translateY(-50%) rotate(-6deg);
 }
+
 }
