@@ -5,7 +5,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Для самой прекрасной ❤️</title>
+<title>Для тебя ❤️</title>
 
 <link rel="stylesheet" href="kotik.css">
 
@@ -22,6 +22,13 @@ justify-content:center;
 align-items:center;
 color:white;
 text-align:center;
+transition:0.5s;
+}
+
+/* затемнение */
+
+.dark{
+background:linear-gradient(135deg,#1a1a1a,#2b2b2b);
 }
 
 /* карточка */
@@ -34,13 +41,21 @@ backdrop-filter:blur(12px);
 z-index:2;
 max-width:420px;
 box-shadow:0 20px 40px rgba(0,0,0,0.25);
+transition:0.5s;
 }
 
-/* заголовок */
+/* фото */
 
-h1{
-font-size:38px;
+.photo{
+width:100%;
+max-width:220px;
+border-radius:20px;
 margin-bottom:20px;
+transition:0.5s;
+}
+
+.photo.big{
+transform:scale(1.15);
 }
 
 /* кнопка */
@@ -61,38 +76,31 @@ button:hover{
 transform:scale(1.15);
 }
 
-/* большое сообщение */
+/* текст */
 
 .bigMessage{
-font-size:28px;
+font-size:30px;
 margin-top:20px;
 font-weight:bold;
 animation:fade 2s;
 }
 
 @keyframes fade{
-from{opacity:0; transform:scale(0.8);}
+from{opacity:0; transform:scale(0.7);}
 to{opacity:1; transform:scale(1);}
 }
 
-/* летающие сердечки */
+/* сердечки */
 
 .floating{
 position:absolute;
-bottom:-50px;
 font-size:26px;
 animation:floatUp linear infinite;
 }
 
 @keyframes floatUp{
-0%{
-transform:translateY(0);
-opacity:1;
-}
-100%{
-transform:translateY(-110vh);
-opacity:0;
-}
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-110vh);opacity:0;}
 }
 
 </style>
@@ -101,33 +109,22 @@ opacity:0;
 
 <body>
 
-<div class="flowersLeft">
-🌸
-🌺
-🌷
-💐
-🌼
-</div>
-
-<div class="flowersRight">
-🌸
-🌷
-🌺
-💐
-🌼
-</div>
+<div class="flowersLeft">🌸 🌺 🌷 💐 🌼</div>
+<div class="flowersRight">🌸 🌷 🌺 💐 🌼</div>
 
 <div class="card">
 
-<img src="mydi.png" class="photo">
+<img src="mydi.png" class="photo" id="photo">
 
-<h1>🌸 С 8 Марта 🌸</h1>
+<h1>🌸 Для тебя 🌸</h1>
 
 <p>
-В этот прекрасный день именно ты делаешь мир вокруг красивее жаным 🌷
+Просто хотел сказать,<br>
+что ты очень особенная для меня 💖<br>
+С тобой всё становится лучше.
 </p>
 
-<button id="loveButton" onclick="love()">Нажми 💌</button>
+<button id="btn" onclick="love()">Нажми 💌</button>
 
 <div id="message" style="display:none;"></div>
 
@@ -138,40 +135,78 @@ opacity:0;
 function love(){
 
 let msg = document.getElementById("message");
-let btn = document.getElementById("loveButton");
+let btn = document.getElementById("btn");
+let photo = document.getElementById("photo");
 
-btn.style.display = "none";
+/* исчезает кнопка */
+btn.style.display="none";
 
-msg.style.display = "block";
+/* затемняется фон */
+document.body.classList.add("dark");
+
+/* увеличивается фото */
+photo.classList.add("big");
+
+/* показывается текст */
+msg.style.display="block";
 
 msg.innerHTML =
-"<div class='bigMessage'>жаным, кошаканым 💖<br>С праздником, с 8 марта тебя!</div>";
+"<div class='bigMessage'>жаным, кошаканым 💖<br>Мне правда очень хорошо с тобой ❤️</div>";
+
+/* взрыв сердечек */
+for(let i=0;i<40;i++){
+createBurst();
+}
 
 }
 
-/* сердечки и цветы */
+/* обычные сердечки */
 
 function create(){
 
 const el=document.createElement("div");
 
-const items=["❤️","💖","🌸","🌷","💐","🌺"];
+const items=["❤️","💖","🌸","🌷"];
 
 el.innerHTML=items[Math.floor(Math.random()*items.length)];
 
 el.className="floating";
 
 el.style.left=Math.random()*100+"vw";
-
+el.style.bottom="-20px";
 el.style.animationDuration=(3+Math.random()*5)+"s";
 
 document.body.appendChild(el);
 
-setTimeout(()=>{el.remove()},8000);
-
+setTimeout(()=>el.remove(),8000);
 }
 
-setInterval(create,300);
+setInterval(create,400);
+
+/* взрыв */
+
+function createBurst(){
+
+const el=document.createElement("div");
+
+el.innerHTML="💖";
+
+el.style.position="absolute";
+el.style.left="50%";
+el.style.top="50%";
+el.style.fontSize="30px";
+
+const x=(Math.random()-0.5)*500;
+const y=(Math.random()-0.5)*500;
+
+el.style.transform=`translate(${x}px,${y}px)`;
+
+el.style.transition="1s";
+
+document.body.appendChild(el);
+
+setTimeout(()=>el.remove(),1000);
+}
 
 </script>
 
